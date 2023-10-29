@@ -10,7 +10,7 @@ const Input = ({ label, textrea, ...props }) => {
         {label}
       </label>
       {textrea ? (
-        <textrea className={classes} {...props} />
+        <textarea className={classes} {...props} />
       ) : (
         <input className={classes} {...props} />
       )}
