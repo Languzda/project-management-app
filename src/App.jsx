@@ -4,6 +4,7 @@ import { v4 as Uuid } from "uuid";
 import NewProject from "./components/NewProject";
 import ProjectSideBar from "./components/ProjectSideBar";
 import NoProjectSelected from "./components/NoProjectSelected";
+import SelectedProject from "./components/SelectedProject";
 
 function App() {
   const [projectsState, setProjectsState] = useState({
@@ -11,7 +12,16 @@ function App() {
     projects: [],
   });
 
-  function handleAddProject() {
+  function handleSelectProject(projectId) {
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: projectId,
+      };
+    });
+  }
+
+  function handleStartAddProject() {
     setProjectsState((prevState) => {
       return {
         ...prevState,
@@ -46,7 +56,11 @@ function App() {
     });
   }
 
-  let content;
+  const selectedProject = projectsState.projects.find(
+    (project) => project.id === projectsState.selectedProjectId
+  );
+
+  let content = <SelectedProject project={selectedProject} />;
 
   if (projectsState.selectedProjectId === null) {
     content = (
@@ -55,15 +69,17 @@ function App() {
         onCancelAddProject={handleCancelAddProject}
       />
     );
-  } else {
-    content = <NoProjectSelected onStartAddProject={handleAddProject} />;
+  } else if (projectsState.selectedProjectId === undefined) {
+    content = <NoProjectSelected onStartAddProject={handleStartAddProject} />;
   }
 
   return (
     <main className="h-screen my-8 flex gap-8">
       <ProjectSideBar
-        onStartAddProject={handleAddProject}
+        onStartAddProject={handleStartAddProject}
         projects={projectsState.projects}
+        selectedProjectId={projectsState.selectedProjectId}
+        onSelectProject={handleSelectProject}
       />
       {content}
     </main>
