@@ -19,7 +19,6 @@ const NewProject = ({ onAddProject, onCancelAddProject }) => {
       return;
     }
 
-    console.log(title, description, dueDate);
     onAddProject({ title, description, dueDate });
   }
 
