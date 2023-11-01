@@ -1,10 +1,13 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import { ProjectsContext } from "../store/ProjectsContextProvider";
+
 import Input from "./Input";
 import Modal from "./Modal";
 
-const NewProject = ({ onAddProject, onCancelAddProject }) => {
-  const modalRef = useRef();
+const NewProject = () => {
+  const { onAddProject, onCancelAddProject } = useContext(ProjectsContext);
 
+  const modalRef = useRef();
   const titleRef = useRef();
   const descriptionRef = useRef();
   const dueDateRef = useRef();

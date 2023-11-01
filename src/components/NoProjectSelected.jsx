@@ -1,8 +1,12 @@
+import { useContext } from "react";
+import { ProjectsContext } from "../store/ProjectsContextProvider";
 import Button from "./Button";
 
 import noProjectImage from "../assets/no-projects.png";
 
-const NoProjectSelected = ({ onStartAddProject }) => {
+const NoProjectSelected = () => {
+  const { onStartAddProject } = useContext(ProjectsContext);
+
   return (
     <div className="mt-24 text-center w-2/3">
       <img
